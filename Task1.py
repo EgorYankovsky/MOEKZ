@@ -144,9 +144,3 @@ def FibonachiMethod(f, eps = 0.005, a0 = 1.0, b0 = 5.0):
                        'bi' : b},
                         index = range(1, n + 1))
     return df
-
-
-def f(x):
-    return 1 - (2 * x ** 2) / (8 * np.sqrt(2 * np.pi)) * np.exp(-1 * (x ** 2) / 8)
-
-print (FibonachiMethod(f))
