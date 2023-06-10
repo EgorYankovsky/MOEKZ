@@ -11,7 +11,7 @@ def FormBine(n) -> int:
 
 
 def FindFib(value):
-    counter = 0
+    counter = 2
     a = 1
     b = 1
     c = a + b
@@ -21,7 +21,7 @@ def FindFib(value):
         b = v
         c = b + a
         counter += 1
-    return counter
+    return counter + 1
 
 
 def DichotomyMethod(f, eps = 1e-3, a0 = -2.0, b0 = 20.0):
@@ -99,16 +99,17 @@ def GoldenRatioMethod(f, eps = 1e-3, a0 = -2.0, b0 = 20.0):
 
     
     
-def FibonachiMethod(f, eps = 1e-3, a0 = -2.0, b0 = 20.0):
+def FibonachiMethod(f, eps = 0.005, a0 = 1.0, b0 = 5.0):
     a, b, x1, x2, fx1, fx2 = [], [], [], [], [], []
     fCount = 0
     delt = b0 - a0
     n2 = FindFib(delt / eps)
+    print (n2)
     Fn2 = FormBine(n2)
-    n = 0
+    n = 1
     a.append(a0)
     b.append(b0)
-    x1.append(a[0] + (b[0] - a[0]) * FormBine(n2 - 2) / Fn2)
+    x1.append(a[0] + delt * FormBine(n2 - 2) / Fn2)
     x2.append(a[0] + b[0] - x1[0])
     fx1.append(f(x1[0]))
     fx2.append(f(x2[0]))
@@ -141,5 +142,11 @@ def FibonachiMethod(f, eps = 1e-3, a0 = -2.0, b0 = 20.0):
                        'x1' : x1,
                        'x2' : x2,
                        'bi' : b},
-                        index = range(1, n + 2))
+                        index = range(1, n + 1))
     return df
+
+
+def f(x):
+    return 1 - (2 * x ** 2) / (8 * np.sqrt(2 * np.pi)) * np.exp(-1 * (x ** 2) / 8)
+
+print (FibonachiMethod(f))
