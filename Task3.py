@@ -12,7 +12,6 @@ def grad(x):
 def f(x):
     return (x[0] + 2 * x[1] - 10)**2 + 10 * (x[0] - 2 * x[1] + 4)**2
 
-
 def new_eta(dxk, dgk, eta):
     temp = np.dot(eta, dgk)
     t = np.dot(dxk - temp, np.transpose(temp)) / np.dot(np.transpose(dgk), temp)
