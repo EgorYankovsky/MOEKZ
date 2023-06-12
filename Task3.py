@@ -2,12 +2,7 @@ import numpy as np
 from scipy.optimize import minimize
 import pandas as pd
 
-def new_eta(dxk, dgk, eta):
-    temp = np.dot(eta, dgk)
-    t = np.dot(dxk - temp, np.transpose(temp)) / np.dot(np.transpose(dgk), temp)
-    return eta + t
-
-def pirson(f, grad, x0):
+def pirson(f, grad, eta_alg, x0):
     x_curr = x0
     x_next = x0
     eta = np.eye(2)
@@ -25,4 +20,4 @@ def pirson(f, grad, x0):
         print("Sk:", Sk)
         print("")
         x_next = x_curr + lk * Sk
-        eta = new_eta(x_next - x_curr, grad(x_next) - grad(x_curr), eta)
+        eta = eta_alg(x_next - x_curr, grad(x_next) - grad(x_curr), eta)
